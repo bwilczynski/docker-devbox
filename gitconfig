@@ -1,0 +1,17 @@
+[alias]
+	cp = cherry-pick
+	st = status
+	ci = commit
+	br = branch
+	co = checkout
+	cob = checkout -b
+	df = diff
+	lg = log --graph --oneline --all --decorate
+	cm = !git add -A && git commit -m
+	branch-name = !git symbolic-ref --short HEAD
+	publish = !git push -u origin $(git branch-name)
+	unpublish = !git push origin :$(git branch-name)
+	cleanup = !git branch --merged | grep  -v \"\\\\*\\\\|master\\\\|main\\\\|develop\" | xargs -n 1 git branch -d
+	purr = pull --rebase
+	puff = pull --ff-only
+	cobf = "!f() { git checkout -b feature/$1; }; f"
