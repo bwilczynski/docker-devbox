@@ -1,8 +1,9 @@
-# autoload -Uz compinit && compinit -i
-
 # powerlevel10k
 source ~/powerlevel10k/powerlevel10k.zsh-theme
 [ -f ~/.p10k.zsh ] && source ~/.p10k.zsh
+
+# fzf
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # kubectl
 alias k=kubectl
