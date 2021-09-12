@@ -13,3 +13,7 @@ alias kgs='k get services'
 alias kgsn='kgs -n'
 
 source <(kubectl completion zsh)
+
+# fix permissions on /run/host-services/ssh-auth.sock when running on Mac
+# based on: https://github.com/docker/for-mac/issues/410
+[ $SSH_AUTH_SOCK = /run/host-services/ssh-auth.sock ] && sudo chmod 666 $SSH_AUTH_SOCK

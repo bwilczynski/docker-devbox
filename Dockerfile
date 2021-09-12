@@ -17,6 +17,7 @@ RUN apt-get update -y && apt-get install -y \
     jq \
     kubectl \
     netcat \
+    sudo \
     wget \
     zsh \
     && rm -rf /var/lib/apt/lists/*
@@ -24,7 +25,9 @@ RUN apt-get update -y && apt-get install -y \
 RUN useradd \
     -m -d /home/${USERNAME} \
     -s /bin/zsh \
+    -G sudo \
     ${USERNAME}
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 USER ${USERNAME}
 
