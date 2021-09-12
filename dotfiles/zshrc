@@ -1,0 +1,14 @@
+# autoload -Uz compinit && compinit -i
+
+# powerlevel10k
+source ~/powerlevel10k/powerlevel10k.zsh-theme
+[ -f ~/.p10k.zsh ] && source ~/.p10k.zsh
+
+# kubectl
+alias k=kubectl
+alias kgp='k get pods'
+alias kgpn='kgp -n'
+alias kgs='k get services'
+alias kgsn='kgs -n'
+
+source <(kubectl completion zsh)
