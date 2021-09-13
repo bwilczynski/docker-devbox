@@ -1,5 +1,7 @@
 # docker-devbox
 
+[![Docker](https://github.com/bwilczynski/docker-devbox/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/bwilczynski/docker-devbox/actions/workflows/docker-publish.yml)
+
 Disposable, dockerized Linux development environment (for MacOS) with various tools that I use regularly for development. Still work in progress.
 
 ## Installation
