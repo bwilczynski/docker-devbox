@@ -1,7 +1,5 @@
 FROM ubuntu:20.10
 
-ARG USERNAME=dev
-
 RUN apt-get update -y && apt-get install -y \
     apt-transport-https \
     ca-certificates \
@@ -31,15 +29,6 @@ RUN apt-get update -y && apt-get install -y \
     zsh \
     && rm -rf /var/lib/apt/lists/*
 
-RUN useradd \
-    -m -d /home/${USERNAME} \
-    -s /bin/zsh \
-    -G sudo \
-    ${USERNAME}
-RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
-
-USER ${USERNAME}
-
 RUN mkdir -p ~/.ssh && \
     ssh-keyscan -t rsa github.com >> ~/.ssh/known_hosts && \
     ssh-keyscan -t rsa bitbucket.com >> ~/.ssh/known_hosts && \
@@ -50,7 +39,7 @@ RUN git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && \
 
 RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
 
-WORKDIR /home/${USERNAME}
+WORKDIR /root
 
 COPY dotfiles/zshrc .zshrc
 COPY dotfiles/p10k.zsh .p10k.zsh
