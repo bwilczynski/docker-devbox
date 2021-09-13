@@ -10,7 +10,7 @@ You need [Docker for Mac](https://docs.docker.com/desktop/mac/install/) in order
 Add the following to your ~/.zshrc on a Mac:
 
 ```sh
-DEVBOX_DOCKER_IMAGE=bwilczynski/devbox
+DEVBOX_DOCKER_IMAGE=ghcr.io/bwilczynski/devbox
 DEVBOX_HOME=/root
 
 devbox() {
