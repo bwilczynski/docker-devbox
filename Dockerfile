@@ -1,8 +1,6 @@
 FROM ubuntu:focal
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG OS="$(uname | tr '[:upper:]' '[:lower:]')"
-ARG ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')"
 ARG KUBECTX_VERSION=0.9.4
 
 RUN apt-get update -y && apt-get install -y \
@@ -46,7 +44,9 @@ RUN git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && \
 
 RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
 
-RUN mkdir -p ~/.kubectx && \
+RUN export OS="$(uname | tr '[:upper:]' '[:lower:]')" && \
+    export ARCH="$(uname -m | sed -e 's/x86_64/amd64/' -e 's/\(arm\)\(64\)\?.*/\1\2/' -e 's/aarch64$/arm64/')" && \
+    mkdir -p ~/.kubectx && \
     curl -fsSL "https://github.com/ahmetb/kubectx/releases/download/v${KUBECTX_VERSION}/kubectx_v${KUBECTX_VERSION}_${OS}_${ARCH}.tar.gz" | \
     tar xvz -C ~/.kubectx && \
     curl -fsSL "https://github.com/ahmetb/kubectx/releases/download/v${KUBECTX_VERSION}/kubens_v${KUBECTX_VERSION}_${OS}_${ARCH}.tar.gz" | \
