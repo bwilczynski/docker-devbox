@@ -10,14 +10,16 @@ You need [Docker for Mac](https://docs.docker.com/desktop/mac/install/) in order
 Add the following to your ~/.zshrc on a Mac:
 
 ```sh
-DEVBOX_DOCKER_IMAGE=ghcr.io/bwilczynski/devbox
+DEVBOX_DOCKER_IMAGE=ghcr.io/bwilczynski/devbox:main
 DEVBOX_HOME=/root
+TZ=Europe/Warsaw
 
 devbox() {
   cmd=$*
 
   docker run --pull always \
     -it --rm \
+    -e TZ=$TZ \
     -v /run/host-services/ssh-auth.sock:/run/host-services/ssh-auth.sock \
     -e SSH_AUTH_SOCK="/run/host-services/ssh-auth.sock" \
     -v /var/run/docker.sock:/var/run/docker.sock \
