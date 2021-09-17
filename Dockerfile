@@ -1,4 +1,4 @@
-FROM ubuntu:20.10
+FROM ubuntu:focal
 
 RUN apt-get update -y && apt-get install -y \
     apt-transport-https \
@@ -18,6 +18,7 @@ RUN curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dea
 
 RUN apt-get update -y && apt-get install -y \
     curl \
+    dnsutils \
     docker-ce-cli \
     git \
     httpie \
