@@ -1,7 +1,6 @@
 FROM ubuntu:focal
 
 ARG DEBIAN_FRONTEND=noninteractive
-ARG KUBECTX_VERSION=0.9.4
 
 RUN apt-get update -y && apt-get install -y \
     apt-transport-https \
@@ -18,7 +17,6 @@ RUN curl -fsSL https://packages.cloud.google.com/apt/doc/apt-key.gpg | gpg --dea
     kubernetes-xenial main" | tee /etc/apt/sources.list.d/kubernetes.list > /dev/null && \
     echo "deb [signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu \
     $(lsb_release -cs) stable" | tee /etc/apt/sources.list.d/docker.list > /dev/null
-
 
 RUN apt-get update -y && apt-get install -y \
     curl \
@@ -44,15 +42,21 @@ RUN git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && \
 
 RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
 
+ARG KUBECTX_VERSION=0.9.4
+
 RUN OS="$(uname | tr '[:upper:]' '[:lower:]')" && \
     ARCH="$(uname -m | sed -e 's/aarch64$/arm64/')" && \
-    mkdir -p ~/.kubectx && \
     curl -fsSL "https://github.com/ahmetb/kubectx/releases/download/v${KUBECTX_VERSION}/kubectx_v${KUBECTX_VERSION}_${OS}_${ARCH}.tar.gz" | \
-    tar xvz -C ~/.kubectx && \
+    tar xvzC /usr/local/bin kubectx && \
     curl -fsSL "https://github.com/ahmetb/kubectx/releases/download/v${KUBECTX_VERSION}/kubens_v${KUBECTX_VERSION}_${OS}_${ARCH}.tar.gz" | \
-    tar xvz -C ~/.kubectx && \
-    ln -s ~/.kubectx/kubectx /usr/local/bin/kubectx && \
-    ln -s ~/.kubectx/kubens /usr/local/bin/kubens
+    tar xvzC /usr/local/bin
+
+ARG K9S_VERSION=0.24.15
+
+RUN OS="$(uname)" && \
+    ARCH="$(uname -m | sed -e 's/aarch64$/arm64/')" && \
+    curl -fsSL "https://github.com/derailed/k9s/releases/download/v${K9S_VERSION}/k9s_${OS}_${ARCH}.tar.gz" | \
+    tar xvzC /usr/local/bin k9s
 
 WORKDIR /root
 
