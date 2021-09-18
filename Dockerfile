@@ -49,7 +49,7 @@ RUN OS="$(uname | tr '[:upper:]' '[:lower:]')" && \
     curl -fsSL "https://github.com/ahmetb/kubectx/releases/download/v${KUBECTX_VERSION}/kubectx_v${KUBECTX_VERSION}_${OS}_${ARCH}.tar.gz" | \
     tar xvzC /usr/local/bin kubectx && \
     curl -fsSL "https://github.com/ahmetb/kubectx/releases/download/v${KUBECTX_VERSION}/kubens_v${KUBECTX_VERSION}_${OS}_${ARCH}.tar.gz" | \
-    tar xvzC /usr/local/bin
+    tar xvzC /usr/local/bin kubens
 
 ARG K9S_VERSION=0.24.15
 
