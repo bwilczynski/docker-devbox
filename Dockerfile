@@ -40,7 +40,7 @@ RUN mkdir -p ~/.ssh && \
 RUN git clone --depth 1 https://github.com/junegunn/fzf.git ~/.fzf && \
     ~/.fzf/install
 
-RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/powerlevel10k
+RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.powerlevel10k
 
 ARG KUBECTX_VERSION=0.9.4
 
