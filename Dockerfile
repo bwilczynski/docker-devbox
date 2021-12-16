@@ -44,7 +44,7 @@ RUN git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ~/.powerlev
 
 ARG KUBECTX_VERSION=0.9.4
 
-RUN OS="$(uname | tr '[:upper:]' '[:lower:]')" && \
+RUN OS="$(uname)" && \
     ARCH="$(uname -m | sed -e 's/aarch64$/arm64/')" && \
     curl -fsSL "https://github.com/ahmetb/kubectx/releases/download/v${KUBECTX_VERSION}/kubectx_v${KUBECTX_VERSION}_${OS}_${ARCH}.tar.gz" | \
     tar xvzC /usr/local/bin kubectx && \
@@ -53,15 +53,16 @@ RUN OS="$(uname | tr '[:upper:]' '[:lower:]')" && \
 
 ARG K9S_VERSION=0.24.15
 
-RUN OS="$(uname | tr '[:upper:]' '[:lower:]')" && \
+RUN OS="$(uname)" && \
     ARCH="$(uname -m | sed -e 's/aarch64$/arm64/')" && \
     curl -fsSL "https://github.com/derailed/k9s/releases/download/v${K9S_VERSION}/k9s_${OS}_${ARCH}.tar.gz" | \
     tar xvzC /usr/local/bin k9s
 
 ARG KUSTOMIZE_VERSION=4.4.1
 
-RUN OS="$(uname | tr '[:upper:]' '[:lower:]')" && \
+RUN OS="$(uname)" && \
     ARCH="$(uname -m | sed -e 's/aarch64$/arm64/')" && \
+    echo "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_${OS}_${ARCH}.tar.gz" && \
     curl -fsSL "https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_${OS}_${ARCH}.tar.gz" | \
     tar xvzC /usr/local/bin kustomize
 
